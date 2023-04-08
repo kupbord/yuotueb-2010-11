@@ -33,16 +33,16 @@
 			    while($row = $result->fetch_assoc()) {
 			        echo '<button type="button" class="flip yt-uix-button yt-uix-button-text" onclick=";return false;"><span class="yt-uix-button-content">'.$row['username'].'</span> <img class="yt-uix-button-arrow" src="http://web.archive.org/web/20100805073628im_/http://s.ytimg.com/yt/img/pixel-vfl73.gif" alt=""><div style="min-width: 139px; left: 914.1px; top: 107.633px; display: none;" class="yt-uix-button-menu yt-uix-button-menu-text hid">	<table>
                     <tbody><tr>
-                        <td><a class="yt-uix-button-menu-item" href="/web/20100805073628/http://youtube.com/profile.php?user='.$row['username'].'">My Channel</a></td>
-                        <td><a class="yt-uix-button-menu-item" href="/web/20100805073628/http://youtube.com/my_subscriptions">Subscriptions</a></td>
+                        <td><a class="yt-uix-button-menu-item" href="profile.php?user='.$row['username'].'">My Channel</a></td>
+                        <td><a class="yt-uix-button-menu-item" href="my_subscriptions.php">Subscriptions</a></td>
                     </tr>
                     <tr>
-                        <td><a class="yt-uix-button-menu-item" href="/web/20100805073628/http://youtube.com/inbox">Inbox</a></td>
-                        <td><a class="yt-uix-button-menu-item" href="/web/20100805073628/http://youtube.com/my_videos">My Videos</a></td>
+                        <td><a class="yt-uix-button-menu-item" href="inbox.php">Inbox</a></td>
+                        <td><a class="yt-uix-button-menu-item" href="my_videos.php">My Videos</a></td>
                     </tr>
                     <tr>
-                        <td><a class="yt-uix-button-menu-item" href="/web/20100805073628/http://youtube.com/account">Account</a></td>
-                        <td><a class="yt-uix-button-menu-item" href="/web/20100805073628/http://youtube.com/my_favorites">Favorites</a></td>
+                        <td><a class="yt-uix-button-menu-item" href="account.php">Account</a></td>
+                        <td><a class="yt-uix-button-menu-item" href="my_favorites.php">Favorites</a></td>
                     </tr>
                 </tbody></table>
             </div></button><a class="end" href="#" onclick="document.logoutForm.submit(); return false;">Sign Out</a>';
