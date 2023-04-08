@@ -85,7 +85,58 @@
 	</td>
 <td valign="top">
 <div id="suSignupDiv">
-
+<?php
+                if(isset($_SESSION['profileuser3'])) {
+                    echo('<script>
+                         window.location.href = "index.php";
+                         </script>');
+                }
+            if (!empty($_POST)){
+                //if ($_POST['name'] == "") {
+                    if(empty($_POST['name'])) {
+                    echo('<script>
+                    window.location.href = "index.php";
+                    </script>');
+                }
+                if(empty($_POST['password'])) {
+                    echo('<script>
+                    window.location.href = "index.php";
+                    </script>');
+                }
+                if(empty($_POST['email'])) {
+                    echo('<script>
+                    window.location.href = "index.php";
+                    </script>');
+                }
+                if (strlen($_POST['name']) > 15) {
+                    echo('Username too long.');
+                    die('
+                <hr>');
+                include("footer.php");
+                echo("</body>
+                </html>");
+                }
+                //i should add captcha support lol but cloudfront breaks it
+                $sql = "SELECT `username` FROM `users` WHERE `username`='". htmlspecialchars($_POST['name']) ."'";
+                $result = $mysqli->query($sql);
+                if($result->num_rows >= 1) {
+                    echo "Username already exists, try something else.";
+                } else {
+                    $statement = $mysqli->prepare("INSERT INTO `users` (`date`, `username`, `email`, `password`) VALUES (now(), ?, ?, ?)");
+                    $statement->bind_param("sss", $username, $email, $password);
+                    $username = htmlspecialchars($_POST['username']);
+                    $email = htmlspecialchars($_POST['email']);
+                    $password = password_hash($_POST['password'], PASSWORD_DEFAULT);
+                    $statement->execute();
+                    $statement->close();
+                    $mysqli->close();
+                    //echo "<br><br>Sucessfully made a YuoTueb account!<br><a href='./alogin.php'>CLICK HERE TO LOGIN</a>";
+                    echo('<script>
+                    window.location.href = "login.php";
+                    </script>');
+                }
+            }
+            ?>
 	 <div class="signup-outer-frame" style="margin-left:0%; margin-right:0%; border: 1px solid #c3d9ff; width: 478px !important;">
 		<div class="signup-inner-frame" style="width: 478px !important;">
 	<form name="signupForm" id="signupForm" method="post" action="">
@@ -121,7 +172,7 @@ Your username can only contain letters A-Z or numbers 0-9
 					<table border="0" cellpadding="2" cellspacing="0">
 						<tr>
 							<td valign="top">
-								<input type="text" size="40" maxlength="20" id="email" name="email" value=""/>
+								<input type="email" size="40" maxlength="20" id="email" name="email" value=""/>
 								<div class="formFieldInfo">
 If you provide a fake email you won't be able to reset your password.
 							</div>
@@ -137,7 +188,7 @@ If you provide a fake email you won't be able to reset your password.
 					<table border="0" cellpadding="2" cellspacing="0">
 						<tr>
 							<td valign="top">
-								<input type="text" size="40" maxlength="20" id="password" name="password" value=""/>
+								<input type="password" size="40" maxlength="20" id="password" name="password" value=""/>
 								<div class="formFieldInfo">
 Make it something secure.
 								</div>
@@ -161,7 +212,7 @@ don't upload illegal or discriminatory/offense stuff, thanks
 					<div style="padding: 10px 10px 10px 0;">Uploading materials that you do not own is a copyright violation and against the law. If you upload material you do not own, your account will be deleted.</div>
 
 					<div style="padding: 0 10px 10px 0;">
-By clicking 'I accept' below you are agreeing to the <a href="/web/20100621135713/http://www.youtube.com/t/terms">YouTube Terms of Use</a>, <a href="https://web.archive.org/web/20100621135713/https://www.google.com/accounts/TOS?loc=US&amp;hl=en">Google Terms of Service</a> and <a href="/web/20100621135713/http://www.youtube.com/t/privacy">Privacy Policy</a>.
+By clicking 'I accept' below you are agreeing to the <a href="terms.php">YuoTueb Terms of Use</a>, <a href="https://redst0ne.xyz/tos">redst0ne Terms of Service</a> and <a href="privacy.php">Privacy Policy</a>.
 					</div>
 				</td>
 			</tr>

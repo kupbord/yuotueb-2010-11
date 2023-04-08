@@ -2,7 +2,7 @@
 		YuoTueb
 			- Broadcast Yourself.
 	</title>
-
+<?php include("conf.php"); ?>
 				<link id="www-core-css" rel="stylesheet" href="core.css">
 
 	<link rel="search" type="application/opensearchdescription+xml" href="https://web.archive.org/web/20100816090028/http://www.youtube.com/opensearch?locale=en_US" title="YouTube Video Search">
