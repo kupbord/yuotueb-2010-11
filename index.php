@@ -1,27 +1,6 @@
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
-		<title>
-		YuoTueb
-			- Broadcast Yourself.
-	</title>
-
-				<link id="www-core-css" rel="stylesheet" href="https://web.archive.org/web/20100816090028cs_/http://s.ytimg.com/yt/cssbin/www-core-vfl183184.css">
-
-	<link rel="search" type="application/opensearchdescription+xml" href="https://web.archive.org/web/20100816090028/http://www.youtube.com/opensearch?locale=en_US" title="YouTube Video Search">
-	<link rel="icon" href="https://web.archive.org/web/20100816090028im_/http://s.ytimg.com/yt/favicon-vfl147246.ico" type="image/x-icon">
-	<link rel="shortcut icon" href="https://web.archive.org/web/20100816090028im_/http://s.ytimg.com/yt/favicon-vfl147246.ico" type="image/x-icon">
-		<link rel="canonical" href="/web/20100816090028/http://www.youtube.com/">
-		<link rel="alternate" media="handheld" href="/m">
-	
-		<meta name="description" content="YuoTueb is a place to discover, watch, upload and share videos.">
-
-		<meta name="keywords" content="video, free, simple, search, find, discover, watch, engage, share, sharing, upload, entertainment">
-
-	
-
-					<script id="www-core-js" src="https://web.archive.org/web/20100816090028js_/http://s.ytimg.com/yt/jsbin/www-core-vfl183033.js"></script>
-
-
+		<?php include("metadata.php"); ?>
 	<!-- begin postpage section -->
 	<script>
 		
@@ -158,36 +137,7 @@
 	</form>
 	<!-- end prepage section -->
 	<div id="page" class="">
-			<div id="masthead-container">
-			<div id="masthead" class="">
-					<a href="/web/20100816090028/http://www.youtube.com/" title="YouTube home">
-			<img id="logo" class="master-sprite" src="https://web.archive.org/web/20100816090028im_/http://s.ytimg.com/yt/img/pixel-vfl73.gif" alt="YouTube home">
-		</a>
-
-		<div id="masthead-search">
-			
-	<form autocomplete="off" class="search-form" action="/web/20100816090028/http://www.youtube.com/results" method="get" name="searchForm" onsubmit="">
-		<input id="masthead-search-term" class="search-term" name="search_query" value="" type="text" tabindex="1" onkeyup="goog.i18n.bidi.setDirAttribute(event,this)" maxlength="128">
-
-
-
-			<button type="button" class="search-button yt-uix-button" onclick="if (_gel('masthead-search-term').value != '') { document['searchForm'].submit(); }; return false;;return false;" tabindex="2"><span class="yt-uix-button-content">Search</span></button>
-
-			<script>document.getElementById('masthead-search-term').focus();</script>
-	</form>
-
-		</div>
-		<div id="masthead-nav">
-			<a href="/web/20100816090028/http://www.youtube.com/videos">Browse</a><a href="https://web.archive.org/web/20100816090028/http://upload.youtube.com/my_videos_upload">Upload</a>
-		</div>
-			<div id="masthead-utility">
-				<a class="start" href="https://web.archive.org/web/20100816090028/https://www.google.com/accounts/LogoutWarning?continue=http%3A%2F%2Fwww.youtube.com%2Fcreate_account%3Fnext%3D%252F&amp;ltmpl=sso&amp;hl=en_US&amp;service=youtube">Create Account</a><a class="end" href="https://web.archive.org/web/20100816090028/https://www.google.com/accounts/ServiceLogin?uilel=3&amp;service=youtube&amp;passive=true&amp;continue=http%3A%2F%2Fwww.youtube.com%2Fsignin%3Faction_handle_signin%3Dtrue%26nomobiletemp%3D1%26hl%3Den_US%26next%3D%252F&amp;hl=en_US&amp;ltmpl=sso">Sign In</a>
-			</div>
-	</div>
-
-	</div>
-	
-	</div> 
+			<?php require("masthead.php"); ?>
 	<div id="baseDiv" class="date-20100816 video-info ">
 			
 
@@ -256,7 +206,7 @@ Saving...
 			<div class="opt-simple-msg">
 				Want to customize this homepage?
 
-				<a href="https://web.archive.org/web/20100816090028/https://www.google.com/accounts/ServiceLogin?uilel=3&amp;service=youtube&amp;passive=true&amp;continue=http%3A%2F%2Fwww.youtube.com%2Fsignin%3Faction_handle_signin%3Dtrue%26nomobiletemp%3D1%26hl%3Den_US%26next%3D%252F&amp;hl=en_US<mpl=sso" onmousedown="yt.analytics.urchinTracker('/Events/Home/PersonalizedHome/LoginSuggest/SignIn/EditModuleBox');">Sign In</a> or <a href="https://web.archive.org/web/20100816090028/https://www.google.com/accounts/LogoutWarning?continue=http%3A%2F%2Fwww.youtube.com%2Fcreate_account%3Fnext%3DNone<mpl=sso&amp;hl=en_US&amp;service=youtube" onmousedown="yt.analytics.urchinTracker('/Events/Home/PersonalizedHome/LoginSuggest/SignUp/EditModuleBox');">Sign Up</a> now!
+				Too bad. I don't know how to or want to implement this.
 
 			</div>
 		</div>
@@ -270,11 +220,7 @@ Saving...
 		<div style="cursor: pointer; display:inline; float: right;" onclick="_hidediv('logged_out_rec_learn_more_box'); return false;" onmousedown="yt.analytics.urchinTracker('/Events/Home/PersonalizedHome/Rec_LearnMore_Close');"><img class="img-php-close-button master-sprite" style="background-position: -82px -712px;" src="https://web.archive.org/web/20100816090028im_/http://s.ytimg.com/yt/img/pixel-vfl73.gif"/></div>
 
 	<div style="color: black; padding-left: 5px;">
-The "Recommended for You" module picks videos based on your viewing history. To see your <a href="/web/20100816090028/http://www.youtube.com/my_history">viewing history</a>, click on the History link at the top right of the page; if you want to clear your history and recommendations, click the "Clear Viewing History" button on that page.
-	</div>
-
-	<div style="color: black; padding-left: 5px; padding-right: 10px; margin-top: 10px;">
-Remember, you will get better, more specific, and more consistent recommendations by <a href="https://web.archive.org/web/20100816090028/https://www.google.com/accounts/ServiceLogin?uilel=3&amp;service=youtube&amp;passive=true&amp;continue=http%3A%2F%2Fwww.youtube.com%2Fsignin%3Faction_handle_signin%3Dtrue%26nomobiletemp%3D1%26hl%3Den_US%26next%3D%252F&amp;hl=en_US&amp;ltmpl=sso">logging in</a> (or <a href="https://web.archive.org/web/20100816090028/https://www.google.com/accounts/LogoutWarning?continue=http%3A%2F%2Fwww.youtube.com%2Fcreate_account%3Fnext%3D%252F&amp;ltmpl=sso&amp;hl=en_US&amp;service=youtube">signing up</a> for a YouTube account, if you don't already have one).
+The "Recommended for You" module shows the most popular videos.
 	</div>
 </div>
 
@@ -2819,7 +2765,7 @@ Watch this video
 									<strong>Want to customize this homepage?
 </strong><br/>
 
-			<a href="https://web.archive.org/web/20100816090028/https://www.google.com/accounts/ServiceLogin?uilel=3&amp;service=youtube&amp;passive=true&amp;continue=http%3A%2F%2Fwww.youtube.com%2Fsignin%3Faction_handle_signin%3Dtrue%26nomobiletemp%3D1%26hl%3Den_US%26next%3D%252F&amp;hl=en_US<mpl=sso">Sign In</a> or <a href="https://web.archive.org/web/20100816090028/https://www.google.com/accounts/LogoutWarning?continue=http%3A%2F%2Fwww.youtube.com%2Fcreate_account%3Fnext%3D<mpl=sso&amp;hl=en_US&amp;service=youtube">Sign Up</a> now!
+			<a href="login.php">Sign In</a> or <a href="create_account.php">Sign Up</a> now!
 
 
 		</div>
@@ -2849,7 +2795,7 @@ Watch this video
 		<a href="https://web.archive.org/web/20100816090028/http://www.google.com/chrome/index.html?brand=CHFH&amp;utm_source=en-et-yt-ftr-lx&amp;utm_medium=et&amp;utm_campaign=en&amp;hl=en-US" id="chrome-link-hp" style="padding: 0;">
 			<button class="master-sprite chrome-icon"></button>
 			<div class="textblock">
-				<div class="tagline">Try YouTube in a new web browser</div>
+				<div class="tagline">Try YuoTueb in a resource-hogging browser</div>
 				<div class="link">Download Google Chrome</div>
 			</div>
 			<div class="clear"></div>
@@ -2929,57 +2875,8 @@ Watch this video
 </div> <!-- end homepage-side-content -->
 
 <div class="clear"></div>
-
-
-
-
-
-		<div id="footer-container">
-				<div id="footer">
-		<ul class="footer-links">
-			<li><a href="https://web.archive.org/web/20100816090028/http://www.google.com/support/youtube/bin/static.py?p=homepage&amp;page=start.cs&amp;hl=en_US">Help</a>
-</li>
-			<li><a href="about.php">About</a></li>
-			<li><a href="#">Safety</a></li>
-			<li><a href="#">Privacy</a></li>
-			<li><a href="#">Terms</a></li>
-			<li><a href="#">Copyright</a></li>
-				<li><a href="#">Uploaders &amp; Partners</a></li>
-				<li><a href="#">Developers</a></li>
-			<li><a href="#" onmousedown="yt.analytics.trackEvent('Footer', 'link', 'Advertising');">Advertising</a></li>
-		</ul>
-		
-			<p class="footer-info">
-				<span dir="ltr">	&copy; 2010 YuoTueb, LLC
-</span>
-
-			</p>
-		
-			<ul class="pickers">
-			<li>Language:
-	<a href="#" onclick="yt.www.masthead.loadPicker('language-picker', ''); return false;">English</a>
-</li>
-			<li>Location:
-	<a href="#" onclick="yt.www.masthead.loadPicker('region-picker', ''); return false;">Worldwide</a>
-</li>
-			<li>Safety mode:
-	<a href="#" onclick="yt.www.masthead.loadPicker('safetymode-picker', ''); return false;">
-
-Off
-
-	</a>
-</li>
-	</ul>
-		<div id="picker-container"></div>
-	<div id="picker-loading" style="display: none">Loading...</div>
-
-
-	</div>
-
-		</div>
-		
-	</div>
-			<div id="quicklist" class="hid passive" data-active-ajax-url="" data-passive-ajax-url="/list_ajax?action_get_quicklist=1&amp;style=bottomfeedr" data-autohide-mode="off">
+<?php include("footer.php"); ?>
+			<div id="quicklist" class="hid passive" data-active-ajax-url="" data-passive-ajax-url="quicklist.php" data-autohide-mode="off">
 		<div id="quicklist-bar-container">
 			<div id="quicklist-bar">
 				<span id="quicklist-info">

@@ -1,0 +1,5 @@
+content/video/
+content/thumb/
+content/unprocessed/
+*.mp4
+conf.php
