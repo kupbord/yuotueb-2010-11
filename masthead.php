@@ -1,12 +1,12 @@
 <div id="masthead-container">
 			<div id="masthead" class="">
-					<a href="/web/20100816090028/http://www.youtube.com/" title="YouTube home">
+					<a href="." title="YouTube home">
 			<img id="logo" class="master-sprite" src="https://web.archive.org/web/20100816090028im_/http://s.ytimg.com/yt/img/pixel-vfl73.gif" alt="YouTube home">
 		</a>
 
 		<div id="masthead-search">
 			
-	<form autocomplete="off" class="search-form" action="/web/20100816090028/http://www.youtube.com/results" method="get" name="searchForm" onsubmit="">
+	<form autocomplete="off" class="search-form" action="results.php" method="get" name="searchForm" onsubmit="">
 		<input id="masthead-search-term" class="search-term" name="search_query" value="" type="text" tabindex="1" onkeyup="goog.i18n.bidi.setDirAttribute(event,this)" maxlength="128">
 
 
@@ -23,7 +23,7 @@
 			<div id="masthead-utility">
             <?php
       if(!$loggedIn) {
-        echo '<a class="start" href="create_account.php">Create Account</a><a class="end" href="login">Sign In</a>';
+        echo '<a class="start" href="create_account.php">Create Account</a><a class="end" href="login.php">Sign In</a>';
       } else {
         $statement = $mysqli->prepare("SELECT * FROM users WHERE username = ? LIMIT 1");
 			    $statement->bind_param("s", $_SESSION['profileuser3']);
@@ -44,8 +44,11 @@
                         <td><a class="yt-uix-button-menu-item" href="account.php">Account</a></td>
                         <td><a class="yt-uix-button-menu-item" href="my_favorites.php">Favorites</a></td>
                     </tr>
+                    <!--<tr>
+                        <td><a class="yt-uix-button-menu-item" href="admin.php" width="175px">Admin</a></td>
+                    </tr>-->
                 </tbody></table>
-            </div></button><a class="end" href="#" onclick="document.logoutForm.submit(); return false;">Sign Out</a>';
+            </div></button><a class="end" href="logout.php" onclick="document.logoutForm.submit(); return false;">Sign Out</a>';
 			    }
 			    $statement->close();
       }

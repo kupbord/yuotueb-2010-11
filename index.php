@@ -132,7 +132,7 @@
  
 	<!--[if IE]><div id="ie"><![endif]-->
 	<!-- begin prepage section -->
-	<form name="logoutForm" method="post" action="/web/20100816090028/http://www.youtube.com/">
+	<form name="logoutForm" method="post" action="logout.php">
 		<input type="hidden" name="action_logout" value="1">
 	</form>
 	<!-- end prepage section -->
@@ -163,7 +163,7 @@
 				<div id="feed_recommended">
 		<div class="fm-title-underlined-gray">
 			<div class="fm2-title">
-				<span class="fm2-titleText" id="feed_recommended-titleText"><a href="/web/20100816090028/http://www.youtube.com/videos?r=1" onmousedown="yt.analytics.urchinTracker('/Events/Home/PersonalizedHome/View_Recommended/Logged_Out');">Recommended for You</a></span>
+				<span class="fm2-titleText" id="feed_recommended-titleText"><a href="videos.php">Recommended for You</a></span>
 			</div>
 
 				<div class="feedmodule-preamble" style="border-bottom: 1px dotted;">
@@ -227,43 +227,22 @@ The "Recommended for You" module shows the most popular videos.
 
 						<div class="feedmodule-body grid-view">
 		<div class="clearL">
-	
-				<div id="reco-eMAQn3TrEUA" class="video-cell" style="width:24.5%" onmouseover="_showdiv('REMOVE-eMAQn3TrEUA');" onmouseout="_hidediv('REMOVE-eMAQn3TrEUA');">
-
-
-
-	
-
-
+		<?php
+$statement = $mysqli->prepare("SELECT * FROM videos ORDER BY date DESC LIMIT 8");
+//$statement->bind_param("s", $_POST['fr']); i have no idea what this is but we don't need it
+$statement->execute();
+$result = $statement->get_result();
+if($result->num_rows !== 0){
+	while($row = $result->fetch_assoc()) {
+		echo '
+				<div id="reco-'.$row['vid'].'" class="video-cell" style="width:24.5%">
+<!--begin video card-->
 	<div class="video-entry" style="position:relative">
-
-
-
-		    <div class="hid" id="REMOVE-eMAQn3TrEUA" style="position:absolute;top:0px;left:140px;z-index:1" onclick="yt.www.recos.removeRecommendation('eMAQn3TrEUA');return false">
+		    <div class="hid" id="REMOVE-'.$row['vid'].'" style="position:absolute;top:0px;left:140px;z-index:1">
 		        <img src="https://web.archive.org/web/20100816090028im_/http://s.ytimg.com/yt/img/pixel-vfl73.gif" class="master-sprite img-php-close-button"/>
 		    </div>
-				
-	
-	
-	
-		
-	
-	
-		
-	
-	
-	
-	
-		
-		
-	
-	
-		
-
-		
-
-<a href="/web/20100816090028/http://www.youtube.com/watch_videos?more_url=%2Fvideos%3Fr%3D1&amp;video_ids=eMAQn3TrEUA%2C6CEjmd6HYpc%2CLm-pQMHjnRI%2CFGX7krQYI_4%2CzAHS5z6QKok%2CY1dnN-FAW3k%2CGhc79UbNpTE%2CJnJO9ILybY4&amp;type=5&amp;feature=rec-LGOUT-exp_fresh%2Bdiv-1r-10-HM" class="video-thumb ux-thumb-128" id="video-thumb-eMAQn3TrEUA-6134125"><span class="img"><img onload="" onclick="ieThumbEvent(event, this); " title="Gulf Oil Disaster:  Worse Than Reported?" alt="Gulf Oil Disaster:  Worse Than Reported?" src="https://web.archive.org/web/20100816090028im_/http://i2.ytimg.com/vi/eMAQn3TrEUA/default.jpg" click="" onmousedown="yt.analytics.urchinTracker('/Events/Home/PersonalizedHome/REC/Logged_Out');"></span>		
-<span class="video-time">9:38</span><span class="video-actions"><button type="button" class=" yt-uix-button yt-uix-button-short" onclick="yt.www.watch.quicklist.clickedAddIcon_w5('video-thumb-eMAQn3TrEUA-6134125', null, 'eMAQn3TrEUA', '', '');return false;"><span class="yt-uix-button-content"><strong>+</strong></span></button></span><span class="video-in-quicklist">Added to <br/> queue</span></a>
+<a href="watch.php?v='.$row['vid'].'" class="video-thumb ux-thumb-128" id="video-thumb-eMAQn3TrEUA-6134125"><span class="img"><img onload="" onclick="ieThumbEvent(event, this); " title="'.$row['videotitle'].'" alt="'.$row['videotitle'].'" src="content/thumb/'.$row['vid'].'.jpg" width="128px" height="96px" click=""></span>		
+<span class="video-time">0:00</span><span class="video-actions"><button type="button" class=" yt-uix-button yt-uix-button-short"><span class="yt-uix-button-content"><strong>+</strong></span></button></span><span class="video-in-quicklist">Added to <br/> queue</span></a>
 
 
 
@@ -285,7 +264,7 @@ The "Recommended for You" module shows the most popular videos.
 
 	
 	
-	<a href="/web/20100816090028/http://www.youtube.com/watch_videos?more_url=%2Fvideos%3Fr%3D1&amp;video_ids=eMAQn3TrEUA%2C6CEjmd6HYpc%2CLm-pQMHjnRI%2CFGX7krQYI_4%2CzAHS5z6QKok%2CY1dnN-FAW3k%2CGhc79UbNpTE%2CJnJO9ILybY4&amp;type=5&amp;feature=rec-LGOUT-exp_fresh%2Bdiv-1r-10-HM" rel="nofollow" title="Gulf Oil Disaster:  Worse Than Reported?" class="" id="video-short-title-eMAQn3TrEUA" onmousedown="yt.analytics.urchinTracker('/Events/Home/PersonalizedHome/REC/Logged_Out');">Gulf Oil Disaster:  Worse Than R...</a>
+	<a href="watch.php?v='.$row['vid'].'" rel="nofollow" title="'.$row['videotitle'].'" class="" id="video-short-title-'.$row['videotitle'].'">'.$row['videotitle'].'</a>
 
 				</div>
 				<div class="video-long-title">
@@ -301,7 +280,7 @@ The "Recommended for You" module shows the most popular videos.
 
 	
 	
-	<a href="/web/20100816090028/http://www.youtube.com/watch_videos?more_url=%2Fvideos%3Fr%3D1&amp;video_ids=eMAQn3TrEUA%2C6CEjmd6HYpc%2CLm-pQMHjnRI%2CFGX7krQYI_4%2CzAHS5z6QKok%2CY1dnN-FAW3k%2CGhc79UbNpTE%2CJnJO9ILybY4&amp;type=5&amp;feature=rec-LGOUT-exp_fresh%2Bdiv-1r-10-HM" rel="nofollow" title="Gulf Oil Disaster:  Worse Than Reported?" class="" id="video-long-title-eMAQn3TrEUA" onmousedown="yt.analytics.urchinTracker('/Events/Home/PersonalizedHome/REC/Logged_Out');">Gulf Oil Disaster:  Worse Than Reported?</a>
+	<a href="watch.php?v='.$row['vid'].'" rel="nofollow" title="'.$row['videotitle'].'" class="" id="video-long-title-'.$row['vid'].'">'.$row['videotitle'].'</a>
 
 						<div class="video-logos">
 	</div>
@@ -309,17 +288,17 @@ The "Recommended for You" module shows the most popular videos.
 				</div>
 			</div>
 
-				<div id="video-description-eMAQn3TrEUA" dir="ltr" class="video-description">
-					Day 50: Mainstream Media has begun to report  that the flow of oil is much higher ...
+				<div id="video-description-'.$row['vid'].'" dir="ltr" class="video-description">
+				'.$row['description'].'
 				</div>
 			
 
       
 
 			<div class="video-facets">
-						<span id="video-added-time-eMAQn3TrEUA" class="video-date-added">2 months ago</span>
+						<span id="video-added-time-'.$row['vid'].'" class="video-date-added">2 months ago</span>
 
-					<span id="video-num-views-eMAQn3TrEUA" class="video-view-count">13,354 views
+					<span id="video-num-views-'.$row['vid'].'" class="video-view-count">'.$row['views'].' views
 </span>
 
 
@@ -333,853 +312,9 @@ The "Recommended for You" module shows the most popular videos.
 
 
 		<div class="video-clear-list-left"></div>
+</div></div>	<!--end video card-->';}}?>
 
-
-	                <div class="smallText grayText"><em>Because you watched</em></div>
-		        <div dir="ltr" class="video-title">
-			    <div class="smallText">
-			        <a href="/web/20100816090028/http://www.youtube.com/watch?v=ffdMWh4P9o4" onmousedown="yt.analytics.urchinTracker('/Events/Home/PersonalizedHome/REC/Logged_Out');" title="Keith Olbermann: Has the oil spill created a 'doomsday effect' for the Gulf? - 06/08/10" rel="nofollow"><em>Keith Olbermann: ...</em></a>
- 			    </div>
-	   	        </div>
-
-
-	</div>	
-</div>	
-
-				<div id="reco-6CEjmd6HYpc" class="video-cell" style="width:24.5%" onmouseover="_showdiv('REMOVE-6CEjmd6HYpc');" onmouseout="_hidediv('REMOVE-6CEjmd6HYpc');">
-
-
-
-	
-
-
-	<div class="video-entry" style="position:relative">
-
-
-
-		    <div class="hid" id="REMOVE-6CEjmd6HYpc" style="position:absolute;top:0px;left:140px;z-index:1" onclick="yt.www.recos.removeRecommendation('6CEjmd6HYpc');return false">
-		        <img src="https://web.archive.org/web/20100816090028im_/http://s.ytimg.com/yt/img/pixel-vfl73.gif" class="master-sprite img-php-close-button"/>
-		    </div>
-				
-	
-	
-	
-		
-	
-	
-		
-	
-	
-	
-	
-		
-		
-	
-	
-		
-
-		
-
-<a href="/web/20100816090028/http://www.youtube.com/watch_videos?more_url=%2Fvideos%3Fr%3D1&amp;video_ids=eMAQn3TrEUA%2C6CEjmd6HYpc%2CLm-pQMHjnRI%2CFGX7krQYI_4%2CzAHS5z6QKok%2CY1dnN-FAW3k%2CGhc79UbNpTE%2CJnJO9ILybY4&amp;type=5&amp;feature=rec-LGOUT-exp_fresh%2Bdiv-1r-3-HM&amp;index=1" class="video-thumb ux-thumb-128" id="video-thumb-6CEjmd6HYpc-3121035"><span class="img"><img onload="" onclick="ieThumbEvent(event, this); " title="Prof Shirley (Part 2) discusses the effects of the Gulf oil spill on marine life" alt="Prof Shirley (Part 2) discusses the effects of the Gulf oil spill on marine life" src="https://web.archive.org/web/20100816090028im_/http://i3.ytimg.com/vi/6CEjmd6HYpc/default.jpg" click="" onmousedown="yt.analytics.urchinTracker('/Events/Home/PersonalizedHome/REC/Logged_Out');"></span>		
-<span class="video-time">4:03</span><span class="video-actions"><button type="button" class=" yt-uix-button yt-uix-button-short" onclick="yt.www.watch.quicklist.clickedAddIcon_w5('video-thumb-6CEjmd6HYpc-3121035', null, '6CEjmd6HYpc', '', '');return false;"><span class="yt-uix-button-content"><strong>+</strong></span></button></span><span class="video-in-quicklist">Added to <br/> queue</span></a>
-
-
-
-		<div class="video-main-content video-title-one-line" id="video-main-content-6CEjmd6HYpc">
-
-
-
-			<div dir="ltr" class="video-title ">
-				<div class="video-short-title">
-						
-	
-	
-
-		
-	
-		
-	
-		
-
-	
-	
-	<a href="/web/20100816090028/http://www.youtube.com/watch_videos?more_url=%2Fvideos%3Fr%3D1&amp;video_ids=eMAQn3TrEUA%2C6CEjmd6HYpc%2CLm-pQMHjnRI%2CFGX7krQYI_4%2CzAHS5z6QKok%2CY1dnN-FAW3k%2CGhc79UbNpTE%2CJnJO9ILybY4&amp;type=5&amp;feature=rec-LGOUT-exp_fresh%2Bdiv-1r-3-HM&amp;index=1" rel="nofollow" title="Prof Shirley (Part 2) discusses the effects of the Gulf oil spill on marine life" class="" id="video-short-title-6CEjmd6HYpc" onmousedown="yt.analytics.urchinTracker('/Events/Home/PersonalizedHome/REC/Logged_Out');">Prof Shirley (Part 2) discusses ...</a>
-
-				</div>
-				<div class="video-long-title">
-						
-	
-	
-
-		
-	
-		
-	
-		
-
-	
-	
-	<a href="/web/20100816090028/http://www.youtube.com/watch_videos?more_url=%2Fvideos%3Fr%3D1&amp;video_ids=eMAQn3TrEUA%2C6CEjmd6HYpc%2CLm-pQMHjnRI%2CFGX7krQYI_4%2CzAHS5z6QKok%2CY1dnN-FAW3k%2CGhc79UbNpTE%2CJnJO9ILybY4&amp;type=5&amp;feature=rec-LGOUT-exp_fresh%2Bdiv-1r-3-HM&amp;index=1" rel="nofollow" title="Prof Shirley (Part 2) discusses the effects of the Gulf oil spill on marine life" class="" id="video-long-title-6CEjmd6HYpc" onmousedown="yt.analytics.urchinTracker('/Events/Home/PersonalizedHome/REC/Logged_Out');">Prof Shirley (Part 2) discusses the effects of the Gulf oil spill o...</a>
-
-						<div class="video-logos">
-	</div>
-
-				</div>
-			</div>
-
-				<div id="video-description-6CEjmd6HYpc" dir="ltr" class="video-description">
-					For more see GlobalResourcesNews.com
-				</div>
-			
-
-      
-
-			<div class="video-facets">
-						<span id="video-added-time-6CEjmd6HYpc" class="video-date-added">2 months ago</span>
-
-					<span id="video-num-views-6CEjmd6HYpc" class="video-view-count">41 views
-</span>
-
-
-
-
-
-				
-			</div>	
-			
-		</div>	
-
-
-		<div class="video-clear-list-left"></div>
-
-
-	                <div class="smallText grayText"><em>Because you watched</em></div>
-		        <div dir="ltr" class="video-title">
-			    <div class="smallText">
-			        <a href="/web/20100816090028/http://www.youtube.com/watch?v=2xvsYAr4jcw" onmousedown="yt.analytics.urchinTracker('/Events/Home/PersonalizedHome/REC/Logged_Out');" title="Prof Robert Twilley (Part 2) describes the Oil spills effect on the coastal ecology" rel="nofollow"><em>Prof Robert Twill...</em></a>
- 			    </div>
-	   	        </div>
-
-
-	</div>	
-</div>	
-
-				<div id="reco-Lm-pQMHjnRI" class="video-cell" style="width:24.5%" onmouseover="_showdiv('REMOVE-Lm-pQMHjnRI');" onmouseout="_hidediv('REMOVE-Lm-pQMHjnRI');">
-
-
-
-	
-
-
-	<div class="video-entry" style="position:relative">
-
-
-
-		    <div class="hid" id="REMOVE-Lm-pQMHjnRI" style="position:absolute;top:0px;left:140px;z-index:1" onclick="yt.www.recos.removeRecommendation('Lm-pQMHjnRI');return false">
-		        <img src="https://web.archive.org/web/20100816090028im_/http://s.ytimg.com/yt/img/pixel-vfl73.gif" class="master-sprite img-php-close-button"/>
-		    </div>
-				
-	
-	
-	
-		
-	
-	
-		
-	
-	
-	
-	
-		
-		
-	
-	
-		
-
-		
-
-<a href="/web/20100816090028/http://www.youtube.com/watch_videos?more_url=%2Fvideos%3Fr%3D1&amp;video_ids=eMAQn3TrEUA%2C6CEjmd6HYpc%2CLm-pQMHjnRI%2CFGX7krQYI_4%2CzAHS5z6QKok%2CY1dnN-FAW3k%2CGhc79UbNpTE%2CJnJO9ILybY4&amp;type=5&amp;feature=rec-LGOUT-exp_fresh%2Bdiv-1r-14-HM&amp;index=2" class="video-thumb ux-thumb-128" id="video-thumb-Lm-pQMHjnRI-3434897"><span class="img"><img onload="" onclick="ieThumbEvent(event, this); " title="OIL SPILL WHAT THEY DON'T WANT U TO KNOW" alt="OIL SPILL WHAT THEY DON'T WANT U TO KNOW" src="https://web.archive.org/web/20100816090028im_/http://i1.ytimg.com/vi/Lm-pQMHjnRI/default.jpg" click="" onmousedown="yt.analytics.urchinTracker('/Events/Home/PersonalizedHome/REC/Logged_Out');"></span>		
-<span class="video-time">4:02</span><span class="video-actions"><button type="button" class=" yt-uix-button yt-uix-button-short" onclick="yt.www.watch.quicklist.clickedAddIcon_w5('video-thumb-Lm-pQMHjnRI-3434897', null, 'Lm-pQMHjnRI', '', '');return false;"><span class="yt-uix-button-content"><strong>+</strong></span></button></span><span class="video-in-quicklist">Added to <br/> queue</span></a>
-
-
-
-		<div class="video-main-content video-title-one-line" id="video-main-content-Lm-pQMHjnRI">
-
-
-
-			<div dir="ltr" class="video-title ">
-				<div class="video-short-title">
-						
-	
-	
-
-		
-	
-		
-	
-		
-
-	
-	
-	<a href="/web/20100816090028/http://www.youtube.com/watch_videos?more_url=%2Fvideos%3Fr%3D1&amp;video_ids=eMAQn3TrEUA%2C6CEjmd6HYpc%2CLm-pQMHjnRI%2CFGX7krQYI_4%2CzAHS5z6QKok%2CY1dnN-FAW3k%2CGhc79UbNpTE%2CJnJO9ILybY4&amp;type=5&amp;feature=rec-LGOUT-exp_fresh%2Bdiv-1r-14-HM&amp;index=2" rel="nofollow" title="OIL SPILL WHAT THEY DON'T WANT U TO KNOW" class="" id="video-short-title-Lm-pQMHjnRI" onmousedown="yt.analytics.urchinTracker('/Events/Home/PersonalizedHome/REC/Logged_Out');">OIL SPILL WHAT THEY DON'T WANT U...</a>
-
-				</div>
-				<div class="video-long-title">
-						
-	
-	
-
-		
-	
-		
-	
-		
-
-	
-	
-	<a href="/web/20100816090028/http://www.youtube.com/watch_videos?more_url=%2Fvideos%3Fr%3D1&amp;video_ids=eMAQn3TrEUA%2C6CEjmd6HYpc%2CLm-pQMHjnRI%2CFGX7krQYI_4%2CzAHS5z6QKok%2CY1dnN-FAW3k%2CGhc79UbNpTE%2CJnJO9ILybY4&amp;type=5&amp;feature=rec-LGOUT-exp_fresh%2Bdiv-1r-14-HM&amp;index=2" rel="nofollow" title="OIL SPILL WHAT THEY DON'T WANT U TO KNOW" class="" id="video-long-title-Lm-pQMHjnRI" onmousedown="yt.analytics.urchinTracker('/Events/Home/PersonalizedHome/REC/Logged_Out');">OIL SPILL WHAT THEY DON'T WANT U TO KNOW</a>
-
-						<div class="video-logos">
-		<a href="/web/20100816090028/http://www.youtube.com/watch_videos?more_url=%2Fvideos%3Fr%3D1&amp;video_ids=eMAQn3TrEUA%2C6CEjmd6HYpc%2CLm-pQMHjnRI%2CFGX7krQYI_4%2CzAHS5z6QKok%2CY1dnN-FAW3k%2CGhc79UbNpTE%2CJnJO9ILybY4&amp;type=5&amp;feature=rec-LGOUT-exp_fresh%2Bdiv-1r-14-HM&amp;index=2&amp;hd=1"><img src="https://web.archive.org/web/20100816090028im_/http://s.ytimg.com/yt/img/pixel-vfl73.gif" class="master-sprite hd-video-logo video-logo"/></a>
-	</div>
-
-				</div>
-			</div>
-
-				<div id="video-description-Lm-pQMHjnRI" dir="ltr" class="video-description">
-					Lawmaker Questions Staffing Level Aboard Rig
-http://online.wsj.com/article/SB10001...
-				</div>
-			
-
-      
-
-			<div class="video-facets">
-						<span id="video-added-time-Lm-pQMHjnRI" class="video-date-added">2 months ago</span>
-
-					<span id="video-num-views-Lm-pQMHjnRI" class="video-view-count">45 views
-</span>
-
-
-
-
-
-				
-			</div>	
-			
-		</div>	
-
-
-		<div class="video-clear-list-left"></div>
-
-
-	                <div class="smallText grayText"><em>Because you watched</em></div>
-		        <div dir="ltr" class="video-title">
-			    <div class="smallText">
-			        <a href="/web/20100816090028/http://www.youtube.com/watch?v=8NZNH-ODQlA" onmousedown="yt.analytics.urchinTracker('/Events/Home/PersonalizedHome/REC/Logged_Out');" title="Celine Simone Cousteau, on World Oceans Day, Gives an Overview of the Gulf Oil Spill" rel="nofollow"><em>Celine Simone Cou...</em></a>
- 			    </div>
-	   	        </div>
-
-
-	</div>	
-</div>	
-
-				<div id="reco-FGX7krQYI_4" class="video-cell" style="width:24.5%" onmouseover="_showdiv('REMOVE-FGX7krQYI_4');" onmouseout="_hidediv('REMOVE-FGX7krQYI_4');">
-
-
-
-	
-
-
-	<div class="video-entry" style="position:relative">
-
-
-
-		    <div class="hid" id="REMOVE-FGX7krQYI_4" style="position:absolute;top:0px;left:140px;z-index:1" onclick="yt.www.recos.removeRecommendation('FGX7krQYI_4');return false">
-		        <img src="https://web.archive.org/web/20100816090028im_/http://s.ytimg.com/yt/img/pixel-vfl73.gif" class="master-sprite img-php-close-button"/>
-		    </div>
-				
-	
-	
-	
-		
-	
-	
-		
-	
-	
-	
-	
-		
-		
-	
-	
-		
-
-		
-
-<a href="/web/20100816090028/http://www.youtube.com/watch_videos?more_url=%2Fvideos%3Fr%3D1&amp;video_ids=eMAQn3TrEUA%2C6CEjmd6HYpc%2CLm-pQMHjnRI%2CFGX7krQYI_4%2CzAHS5z6QKok%2CY1dnN-FAW3k%2CGhc79UbNpTE%2CJnJO9ILybY4&amp;type=5&amp;feature=rec-LGOUT-exp_fresh%2Bdiv-1r-5-HM&amp;index=3" class="video-thumb ux-thumb-128" id="video-thumb-FGX7krQYI_4-5685941"><span class="img"><img onload="" onclick="ieThumbEvent(event, this); " title="AP Exclusive: Scuba Diving in the Gulf Oil Spill" alt="AP Exclusive: Scuba Diving in the Gulf Oil Spill" src="https://web.archive.org/web/20100816090028im_/http://i3.ytimg.com/vi/FGX7krQYI_4/default.jpg" click="" onmousedown="yt.analytics.urchinTracker('/Events/Home/PersonalizedHome/REC/Logged_Out');"></span>		
-<span class="video-time">3:24</span><span class="video-actions"><button type="button" class=" yt-uix-button yt-uix-button-short" onclick="yt.www.watch.quicklist.clickedAddIcon_w5('video-thumb-FGX7krQYI_4-5685941', null, 'FGX7krQYI_4', '', '');return false;"><span class="yt-uix-button-content"><strong>+</strong></span></button></span><span class="video-in-quicklist">Added to <br/> queue</span></a>
-
-
-
-		<div class="video-main-content video-title-one-line" id="video-main-content-FGX7krQYI_4">
-
-
-
-			<div dir="ltr" class="video-title ">
-				<div class="video-short-title">
-						
-	
-	
-
-		
-	
-		
-	
-		
-
-	
-	
-	<a href="/web/20100816090028/http://www.youtube.com/watch_videos?more_url=%2Fvideos%3Fr%3D1&amp;video_ids=eMAQn3TrEUA%2C6CEjmd6HYpc%2CLm-pQMHjnRI%2CFGX7krQYI_4%2CzAHS5z6QKok%2CY1dnN-FAW3k%2CGhc79UbNpTE%2CJnJO9ILybY4&amp;type=5&amp;feature=rec-LGOUT-exp_fresh%2Bdiv-1r-5-HM&amp;index=3" rel="nofollow" title="AP Exclusive: Scuba Diving in the Gulf Oil Spill" class="" id="video-short-title-FGX7krQYI_4" onmousedown="yt.analytics.urchinTracker('/Events/Home/PersonalizedHome/REC/Logged_Out');">AP Exclusive: Scuba Diving in th...</a>
-
-				</div>
-				<div class="video-long-title">
-						
-	
-	
-
-		
-	
-		
-	
-		
-
-	
-	
-	<a href="/web/20100816090028/http://www.youtube.com/watch_videos?more_url=%2Fvideos%3Fr%3D1&amp;video_ids=eMAQn3TrEUA%2C6CEjmd6HYpc%2CLm-pQMHjnRI%2CFGX7krQYI_4%2CzAHS5z6QKok%2CY1dnN-FAW3k%2CGhc79UbNpTE%2CJnJO9ILybY4&amp;type=5&amp;feature=rec-LGOUT-exp_fresh%2Bdiv-1r-5-HM&amp;index=3" rel="nofollow" title="AP Exclusive: Scuba Diving in the Gulf Oil Spill" class="" id="video-long-title-FGX7krQYI_4" onmousedown="yt.analytics.urchinTracker('/Events/Home/PersonalizedHome/REC/Logged_Out');">AP Exclusive: Scuba Diving in the Gulf Oil Spill</a>
-
-						<div class="video-logos">
-	</div>
-
-				</div>
-			</div>
-
-				<div id="video-description-FGX7krQYI_4" dir="ltr" class="video-description">
-					A rare and different perspective at the oil spill from beneath the surface. The AP...
-				</div>
-			
-
-      
-
-			<div class="video-facets">
-						<span id="video-added-time-FGX7krQYI_4" class="video-date-added">2 months ago</span>
-
-					<span id="video-num-views-FGX7krQYI_4" class="video-view-count">170,140 views
-</span>
-
-
-
-
-
-				
-			</div>	
-			
-		</div>	
-
-
-		<div class="video-clear-list-left"></div>
-
-
-	                <div class="smallText grayText"><em>Because you watched</em></div>
-		        <div dir="ltr" class="video-title">
-			    <div class="smallText">
-			        <a href="/web/20100816090028/http://www.youtube.com/watch?v=TQq1RINZUnM" onmousedown="yt.analytics.urchinTracker('/Events/Home/PersonalizedHome/REC/Logged_Out');" title="Most Unreported Part Of Gulf Oil Spill" rel="nofollow"><em>Most Unreported P...</em></a>
- 			    </div>
-	   	        </div>
-
-
-	</div>	
-</div>	
-
-				<div id="reco-zAHS5z6QKok" class="video-cell" style="width:24.5%" onmouseover="_showdiv('REMOVE-zAHS5z6QKok');" onmouseout="_hidediv('REMOVE-zAHS5z6QKok');">
-
-
-
-	
-
-
-	<div class="video-entry" style="position:relative">
-
-
-
-		    <div class="hid" id="REMOVE-zAHS5z6QKok" style="position:absolute;top:0px;left:140px;z-index:1" onclick="yt.www.recos.removeRecommendation('zAHS5z6QKok');return false">
-		        <img src="https://web.archive.org/web/20100816090028im_/http://s.ytimg.com/yt/img/pixel-vfl73.gif" class="master-sprite img-php-close-button"/>
-		    </div>
-				
-	
-	
-	
-		
-	
-	
-		
-	
-	
-	
-	
-		
-		
-	
-	
-		
-
-		
-
-<a href="/web/20100816090028/http://www.youtube.com/watch_videos?more_url=%2Fvideos%3Fr%3D1&amp;video_ids=eMAQn3TrEUA%2C6CEjmd6HYpc%2CLm-pQMHjnRI%2CFGX7krQYI_4%2CzAHS5z6QKok%2CY1dnN-FAW3k%2CGhc79UbNpTE%2CJnJO9ILybY4&amp;type=5&amp;feature=rec-LGOUT-exp_fresh%2Bdiv-1r-6-HM&amp;index=4" class="video-thumb ux-thumb-128" id="video-thumb-zAHS5z6QKok-7664246"><span class="img"><img onload="" onclick="ieThumbEvent(event, this); " title="Gulf Oil Spill?" alt="Gulf Oil Spill?" src="https://web.archive.org/web/20100816090028im_/http://i3.ytimg.com/vi/zAHS5z6QKok/default.jpg" click="" onmousedown="yt.analytics.urchinTracker('/Events/Home/PersonalizedHome/REC/Logged_Out');"></span>		
-<span class="video-time">3:52</span><span class="video-actions"><button type="button" class=" yt-uix-button yt-uix-button-short" onclick="yt.www.watch.quicklist.clickedAddIcon_w5('video-thumb-zAHS5z6QKok-7664246', null, 'zAHS5z6QKok', '', '');return false;"><span class="yt-uix-button-content"><strong>+</strong></span></button></span><span class="video-in-quicklist">Added to <br/> queue</span></a>
-
-
-
-		<div class="video-main-content video-title-one-line" id="video-main-content-zAHS5z6QKok">
-
-
-
-			<div dir="ltr" class="video-title ">
-				<div class="video-short-title">
-						
-	
-	
-
-		
-	
 		
-	
-		
-
-	
-	
-	<a href="/web/20100816090028/http://www.youtube.com/watch_videos?more_url=%2Fvideos%3Fr%3D1&amp;video_ids=eMAQn3TrEUA%2C6CEjmd6HYpc%2CLm-pQMHjnRI%2CFGX7krQYI_4%2CzAHS5z6QKok%2CY1dnN-FAW3k%2CGhc79UbNpTE%2CJnJO9ILybY4&amp;type=5&amp;feature=rec-LGOUT-exp_fresh%2Bdiv-1r-6-HM&amp;index=4" rel="nofollow" title="Gulf Oil Spill?" class="" id="video-short-title-zAHS5z6QKok" onmousedown="yt.analytics.urchinTracker('/Events/Home/PersonalizedHome/REC/Logged_Out');">Gulf Oil Spill?</a>
-
-				</div>
-				<div class="video-long-title">
-						
-	
-	
-
-		
-	
-		
-	
-		
-
-	
-	
-	<a href="/web/20100816090028/http://www.youtube.com/watch_videos?more_url=%2Fvideos%3Fr%3D1&amp;video_ids=eMAQn3TrEUA%2C6CEjmd6HYpc%2CLm-pQMHjnRI%2CFGX7krQYI_4%2CzAHS5z6QKok%2CY1dnN-FAW3k%2CGhc79UbNpTE%2CJnJO9ILybY4&amp;type=5&amp;feature=rec-LGOUT-exp_fresh%2Bdiv-1r-6-HM&amp;index=4" rel="nofollow" title="Gulf Oil Spill?" class="" id="video-long-title-zAHS5z6QKok" onmousedown="yt.analytics.urchinTracker('/Events/Home/PersonalizedHome/REC/Logged_Out');">Gulf Oil Spill?</a>
-
-						<div class="video-logos">
-	</div>
-
-				</div>
-			</div>
-
-				<div id="video-description-zAHS5z6QKok" dir="ltr" class="video-description">
-					Spill? The corporate media, government officials, and oil company executives, cont...
-				</div>
-			
-
-      
-
-			<div class="video-facets">
-						<span id="video-added-time-zAHS5z6QKok" class="video-date-added">2 months ago</span>
-
-					<span id="video-num-views-zAHS5z6QKok" class="video-view-count">19,434 views
-</span>
-
-
-
-
-
-				
-			</div>	
-			
-		</div>	
-
-
-		<div class="video-clear-list-left"></div>
-
-
-	                <div class="smallText grayText"><em>Because you watched</em></div>
-		        <div dir="ltr" class="video-title">
-			    <div class="smallText">
-			        <a href="/web/20100816090028/http://www.youtube.com/watch?v=Amk6gqwnh2g" onmousedown="yt.analytics.urchinTracker('/Events/Home/PersonalizedHome/REC/Logged_Out');" title="Why You're Being Told Gulf 'Spill' is Oil &amp; Not a Volcano 1/2 Gulf Oil Spill NOT AN OIL SPILL?" rel="nofollow"><em>Why You're Being ...</em></a>
- 			    </div>
-	   	        </div>
-
-
-	</div>	
-</div>	
-
-				<div id="reco-Y1dnN-FAW3k" class="video-cell" style="width:24.5%" onmouseover="_showdiv('REMOVE-Y1dnN-FAW3k');" onmouseout="_hidediv('REMOVE-Y1dnN-FAW3k');">
-
-
-
-	
-
-
-	<div class="video-entry" style="position:relative">
-
-
-
-		    <div class="hid" id="REMOVE-Y1dnN-FAW3k" style="position:absolute;top:0px;left:140px;z-index:1" onclick="yt.www.recos.removeRecommendation('Y1dnN-FAW3k');return false">
-		        <img src="https://web.archive.org/web/20100816090028im_/http://s.ytimg.com/yt/img/pixel-vfl73.gif" class="master-sprite img-php-close-button"/>
-		    </div>
-				
-	
-	
-	
-		
-	
-	
-		
-	
-	
-	
-	
-		
-		
-	
-	
-		
-
-		
-
-<a href="/web/20100816090028/http://www.youtube.com/watch_videos?more_url=%2Fvideos%3Fr%3D1&amp;video_ids=eMAQn3TrEUA%2C6CEjmd6HYpc%2CLm-pQMHjnRI%2CFGX7krQYI_4%2CzAHS5z6QKok%2CY1dnN-FAW3k%2CGhc79UbNpTE%2CJnJO9ILybY4&amp;type=5&amp;feature=rec-LGOUT-exp_fresh%2Bdiv-1r-4-HM&amp;index=5" class="video-thumb ux-thumb-128" id="video-thumb-Y1dnN-FAW3k-9794573"><span class="img"><img onload="" onclick="ieThumbEvent(event, this); " title="Gulf Oil Spill: Day 50" alt="Gulf Oil Spill: Day 50" src="https://web.archive.org/web/20100816090028im_/http://i2.ytimg.com/vi/Y1dnN-FAW3k/default.jpg" click="" onmousedown="yt.analytics.urchinTracker('/Events/Home/PersonalizedHome/REC/Logged_Out');"></span>		
-<span class="video-time">1:36</span><span class="video-actions"><button type="button" class=" yt-uix-button yt-uix-button-short" onclick="yt.www.watch.quicklist.clickedAddIcon_w5('video-thumb-Y1dnN-FAW3k-9794573', null, 'Y1dnN-FAW3k', '', '');return false;"><span class="yt-uix-button-content"><strong>+</strong></span></button></span><span class="video-in-quicklist">Added to <br/> queue</span></a>
-
-
-
-		<div class="video-main-content video-title-one-line" id="video-main-content-Y1dnN-FAW3k">
-
-
-
-			<div dir="ltr" class="video-title ">
-				<div class="video-short-title">
-						
-	
-	
-
-		
-	
-		
-	
-		
-
-	
-	
-	<a href="/web/20100816090028/http://www.youtube.com/watch_videos?more_url=%2Fvideos%3Fr%3D1&amp;video_ids=eMAQn3TrEUA%2C6CEjmd6HYpc%2CLm-pQMHjnRI%2CFGX7krQYI_4%2CzAHS5z6QKok%2CY1dnN-FAW3k%2CGhc79UbNpTE%2CJnJO9ILybY4&amp;type=5&amp;feature=rec-LGOUT-exp_fresh%2Bdiv-1r-4-HM&amp;index=5" rel="nofollow" title="Gulf Oil Spill: Day 50" class="" id="video-short-title-Y1dnN-FAW3k" onmousedown="yt.analytics.urchinTracker('/Events/Home/PersonalizedHome/REC/Logged_Out');">Gulf Oil Spill: Day 50</a>
-
-				</div>
-				<div class="video-long-title">
-						
-	
-	
-
-		
-	
-		
-	
-		
-
-	
-	
-	<a href="/web/20100816090028/http://www.youtube.com/watch_videos?more_url=%2Fvideos%3Fr%3D1&amp;video_ids=eMAQn3TrEUA%2C6CEjmd6HYpc%2CLm-pQMHjnRI%2CFGX7krQYI_4%2CzAHS5z6QKok%2CY1dnN-FAW3k%2CGhc79UbNpTE%2CJnJO9ILybY4&amp;type=5&amp;feature=rec-LGOUT-exp_fresh%2Bdiv-1r-4-HM&amp;index=5" rel="nofollow" title="Gulf Oil Spill: Day 50" class="" id="video-long-title-Y1dnN-FAW3k" onmousedown="yt.analytics.urchinTracker('/Events/Home/PersonalizedHome/REC/Logged_Out');">Gulf Oil Spill: Day 50</a>
-
-						<div class="video-logos">
-	</div>
-
-				</div>
-			</div>
-
-				<div id="video-description-Y1dnN-FAW3k" dir="ltr" class="video-description">
-					President Barack Obama wants to "kick ass" in dealing with the Gulf Oil Spill, whi...
-				</div>
-			
-
-      
-
-			<div class="video-facets">
-						<span id="video-added-time-Y1dnN-FAW3k" class="video-date-added">2 months ago</span>
-
-					<span id="video-num-views-Y1dnN-FAW3k" class="video-view-count">503 views
-</span>
-
-
-
-
-
-				
-			</div>	
-			
-		</div>	
-
-
-		<div class="video-clear-list-left"></div>
-
-
-	                <div class="smallText grayText"><em>Because you watched</em></div>
-		        <div dir="ltr" class="video-title">
-			    <div class="smallText">
-			        <a href="/web/20100816090028/http://www.youtube.com/watch?v=8NZNH-ODQlA" onmousedown="yt.analytics.urchinTracker('/Events/Home/PersonalizedHome/REC/Logged_Out');" title="Celine Simone Cousteau, on World Oceans Day, Gives an Overview of the Gulf Oil Spill" rel="nofollow"><em>Celine Simone Cou...</em></a>
- 			    </div>
-	   	        </div>
-
-
-	</div>	
-</div>	
-
-				<div id="reco-Ghc79UbNpTE" class="video-cell" style="width:24.5%" onmouseover="_showdiv('REMOVE-Ghc79UbNpTE');" onmouseout="_hidediv('REMOVE-Ghc79UbNpTE');">
-
-
-
-	
-
-
-	<div class="video-entry" style="position:relative">
-
-
-
-		    <div class="hid" id="REMOVE-Ghc79UbNpTE" style="position:absolute;top:0px;left:140px;z-index:1" onclick="yt.www.recos.removeRecommendation('Ghc79UbNpTE');return false">
-		        <img src="https://web.archive.org/web/20100816090028im_/http://s.ytimg.com/yt/img/pixel-vfl73.gif" class="master-sprite img-php-close-button"/>
-		    </div>
-				
-	
-	
-	
-		
-	
-	
-		
-	
-	
-	
-	
-		
-		
-	
-	
-		
-
-		
-
-<a href="/web/20100816090028/http://www.youtube.com/watch_videos?more_url=%2Fvideos%3Fr%3D1&amp;video_ids=eMAQn3TrEUA%2C6CEjmd6HYpc%2CLm-pQMHjnRI%2CFGX7krQYI_4%2CzAHS5z6QKok%2CY1dnN-FAW3k%2CGhc79UbNpTE%2CJnJO9ILybY4&amp;type=5&amp;feature=rec-LGOUT-exp_fresh%2Bdiv-1r-2-HM&amp;index=6" class="video-thumb ux-thumb-128" id="video-thumb-Ghc79UbNpTE-4331867"><span class="img"><img onload="" onclick="ieThumbEvent(event, this); " title="Jed Clampett and the BP Oil Spill in the Gulf" alt="Jed Clampett and the BP Oil Spill in the Gulf" src="https://web.archive.org/web/20100816090028im_/http://i4.ytimg.com/vi/Ghc79UbNpTE/default.jpg" click="" onmousedown="yt.analytics.urchinTracker('/Events/Home/PersonalizedHome/REC/Logged_Out');"></span>		
-<span class="video-time">0:51</span><span class="video-actions"><button type="button" class=" yt-uix-button yt-uix-button-short" onclick="yt.www.watch.quicklist.clickedAddIcon_w5('video-thumb-Ghc79UbNpTE-4331867', null, 'Ghc79UbNpTE', '', '');return false;"><span class="yt-uix-button-content"><strong>+</strong></span></button></span><span class="video-in-quicklist">Added to <br/> queue</span></a>
-
-
-
-		<div class="video-main-content video-title-one-line" id="video-main-content-Ghc79UbNpTE">
-
-
-
-			<div dir="ltr" class="video-title ">
-				<div class="video-short-title">
-						
-	
-	
-
-		
-	
-		
-	
-		
-
-	
-	
-	<a href="/web/20100816090028/http://www.youtube.com/watch_videos?more_url=%2Fvideos%3Fr%3D1&amp;video_ids=eMAQn3TrEUA%2C6CEjmd6HYpc%2CLm-pQMHjnRI%2CFGX7krQYI_4%2CzAHS5z6QKok%2CY1dnN-FAW3k%2CGhc79UbNpTE%2CJnJO9ILybY4&amp;type=5&amp;feature=rec-LGOUT-exp_fresh%2Bdiv-1r-2-HM&amp;index=6" rel="nofollow" title="Jed Clampett and the BP Oil Spill in the Gulf" class="" id="video-short-title-Ghc79UbNpTE" onmousedown="yt.analytics.urchinTracker('/Events/Home/PersonalizedHome/REC/Logged_Out');">Jed Clampett and the BP Oil Spil...</a>
-
-				</div>
-				<div class="video-long-title">
-						
-	
-	
-
-		
-	
-		
-	
-		
-
-	
-	
-	<a href="/web/20100816090028/http://www.youtube.com/watch_videos?more_url=%2Fvideos%3Fr%3D1&amp;video_ids=eMAQn3TrEUA%2C6CEjmd6HYpc%2CLm-pQMHjnRI%2CFGX7krQYI_4%2CzAHS5z6QKok%2CY1dnN-FAW3k%2CGhc79UbNpTE%2CJnJO9ILybY4&amp;type=5&amp;feature=rec-LGOUT-exp_fresh%2Bdiv-1r-2-HM&amp;index=6" rel="nofollow" title="Jed Clampett and the BP Oil Spill in the Gulf" class="" id="video-long-title-Ghc79UbNpTE" onmousedown="yt.analytics.urchinTracker('/Events/Home/PersonalizedHome/REC/Logged_Out');">Jed Clampett and the BP Oil Spill in the Gulf</a>
-
-						<div class="video-logos">
-	</div>
-
-				</div>
-			</div>
-
-				<div id="video-description-Ghc79UbNpTE" dir="ltr" class="video-description">
-					Is Jed Clampett responsible for the recent oil crisis? New video reveals all.
-				</div>
-			
-
-      
-
-			<div class="video-facets">
-						<span id="video-added-time-Ghc79UbNpTE" class="video-date-added">2 months ago</span>
-
-					<span id="video-num-views-Ghc79UbNpTE" class="video-view-count">71 views
-</span>
-
-
-
-
-
-				
-			</div>	
-			
-		</div>	
-
-
-		<div class="video-clear-list-left"></div>
-
-
-	                <div class="smallText grayText"><em>Because you watched</em></div>
-		        <div dir="ltr" class="video-title">
-			    <div class="smallText">
-			        <a href="/web/20100816090028/http://www.youtube.com/watch?v=2xvsYAr4jcw" onmousedown="yt.analytics.urchinTracker('/Events/Home/PersonalizedHome/REC/Logged_Out');" title="Prof Robert Twilley (Part 2) describes the Oil spills effect on the coastal ecology" rel="nofollow"><em>Prof Robert Twill...</em></a>
- 			    </div>
-	   	        </div>
-
-
-	</div>	
-</div>	
-
-				<div id="reco-JnJO9ILybY4" class="video-cell" style="width:24.5%" onmouseover="_showdiv('REMOVE-JnJO9ILybY4');" onmouseout="_hidediv('REMOVE-JnJO9ILybY4');">
-
-
-
-	
-
-
-	<div class="video-entry" style="position:relative">
-
-
-
-		    <div class="hid" id="REMOVE-JnJO9ILybY4" style="position:absolute;top:0px;left:140px;z-index:1" onclick="yt.www.recos.removeRecommendation('JnJO9ILybY4');return false">
-		        <img src="https://web.archive.org/web/20100816090028im_/http://s.ytimg.com/yt/img/pixel-vfl73.gif" class="master-sprite img-php-close-button"/>
-		    </div>
-				
-	
-	
-	
-		
-	
-	
-		
-	
-	
-	
-	
-		
-		
-	
-	
-		
-
-		
-
-<a href="/web/20100816090028/http://www.youtube.com/watch_videos?more_url=%2Fvideos%3Fr%3D1&amp;video_ids=eMAQn3TrEUA%2C6CEjmd6HYpc%2CLm-pQMHjnRI%2CFGX7krQYI_4%2CzAHS5z6QKok%2CY1dnN-FAW3k%2CGhc79UbNpTE%2CJnJO9ILybY4&amp;type=5&amp;feature=rec-LGOUT-exp_fresh%2Bdiv-1r-11-HM&amp;index=7" class="video-thumb ux-thumb-128" id="video-thumb-JnJO9ILybY4-9390050"><span class="img"><img onload="" onclick="ieThumbEvent(event, this); " title="Response to Critics of the Gulf Oil Spill Vs. Volcano Theory &amp; Henning Kemner's Audio 1/4" alt="Response to Critics of the Gulf Oil Spill Vs. Volcano Theory &amp; Henning Kemner's Audio 1/4" src="https://web.archive.org/web/20100816090028im_/http://i3.ytimg.com/vi/JnJO9ILybY4/default.jpg" click="" onmousedown="yt.analytics.urchinTracker('/Events/Home/PersonalizedHome/REC/Logged_Out');"></span>		
-<span class="video-time">10:40</span><span class="video-actions"><button type="button" class=" yt-uix-button yt-uix-button-short" onclick="yt.www.watch.quicklist.clickedAddIcon_w5('video-thumb-JnJO9ILybY4-9390050', null, 'JnJO9ILybY4', '', '');return false;"><span class="yt-uix-button-content"><strong>+</strong></span></button></span><span class="video-in-quicklist">Added to <br/> queue</span></a>
-
-
-
-		<div class="video-main-content video-title-one-line" id="video-main-content-JnJO9ILybY4">
-
-
-
-			<div dir="ltr" class="video-title ">
-				<div class="video-short-title">
-						
-	
-	
-
-		
-	
-		
-	
-		
-
-	
-	
-	<a href="/web/20100816090028/http://www.youtube.com/watch_videos?more_url=%2Fvideos%3Fr%3D1&amp;video_ids=eMAQn3TrEUA%2C6CEjmd6HYpc%2CLm-pQMHjnRI%2CFGX7krQYI_4%2CzAHS5z6QKok%2CY1dnN-FAW3k%2CGhc79UbNpTE%2CJnJO9ILybY4&amp;type=5&amp;feature=rec-LGOUT-exp_fresh%2Bdiv-1r-11-HM&amp;index=7" rel="nofollow" title="Response to Critics of the Gulf Oil Spill Vs. Volcano Theory &amp; Henning Kemner's Audio 1/4" class="" id="video-short-title-JnJO9ILybY4" onmousedown="yt.analytics.urchinTracker('/Events/Home/PersonalizedHome/REC/Logged_Out');">Response to Critics of the Gulf ...</a>
-
-				</div>
-				<div class="video-long-title">
-						
-	
-	
-
-		
-	
-		
-	
-		
-
-	
-	
-	<a href="/web/20100816090028/http://www.youtube.com/watch_videos?more_url=%2Fvideos%3Fr%3D1&amp;video_ids=eMAQn3TrEUA%2C6CEjmd6HYpc%2CLm-pQMHjnRI%2CFGX7krQYI_4%2CzAHS5z6QKok%2CY1dnN-FAW3k%2CGhc79UbNpTE%2CJnJO9ILybY4&amp;type=5&amp;feature=rec-LGOUT-exp_fresh%2Bdiv-1r-11-HM&amp;index=7" rel="nofollow" title="Response to Critics of the Gulf Oil Spill Vs. Volcano Theory &amp; Henning Kemner's Audio 1/4" class="" id="video-long-title-JnJO9ILybY4" onmousedown="yt.analytics.urchinTracker('/Events/Home/PersonalizedHome/REC/Logged_Out');">Response to Critics of the Gulf Oil Spill Vs. Volcano Theory &amp; Henn...</a>
-
-						<div class="video-logos">
-	</div>
-
-				</div>
-			</div>
-
-				<div id="video-description-JnJO9ILybY4" dir="ltr" class="video-description">
-					Why are conspiracy theoriests believing the mass media now? This AntimatterRadio.c...
-				</div>
-			
-
-      
-
-			<div class="video-facets">
-						<span id="video-added-time-JnJO9ILybY4" class="video-date-added">2 months ago</span>
-
-					<span id="video-num-views-JnJO9ILybY4" class="video-view-count">2,971 views
-</span>
-
-
-
-
-
-				
-			</div>	
-			
-		</div>	
-
-
-		<div class="video-clear-list-left"></div>
-
-
-	                <div class="smallText grayText"><em>Because you watched</em></div>
-		        <div dir="ltr" class="video-title">
-			    <div class="smallText">
-			        <a href="/web/20100816090028/http://www.youtube.com/watch?v=Amk6gqwnh2g" onmousedown="yt.analytics.urchinTracker('/Events/Home/PersonalizedHome/REC/Logged_Out');" title="Why You're Being Told Gulf 'Spill' is Oil &amp; Not a Volcano 1/2 Gulf Oil Spill NOT AN OIL SPILL?" rel="nofollow"><em>Why You're Being ...</em></a>
- 			    </div>
-	   	        </div>
-
-
-	</div>	
-</div>	
-
-		</div>
-	</div>
-
-
-		</div>
-	</div>
 	<div class="clear"></div>
 	
 
@@ -2757,7 +1892,9 @@ Watch this video
 				
 	
 	
-	
+	<?php
+	if(!isset($_SESSION['profileuser3'])) {
+		echo '
 	<div id="iyt-login-suggest-side-box" class="yt-alert yt-alert-announce yt-rounded">
 			<img src="https://web.archive.org/web/20100816090028im_/http://s.ytimg.com/yt/img/pixel-vfl73.gif" class="icon master-sprite" alt="Alert icon">
 		
@@ -2773,7 +1910,7 @@ Watch this video
 	</div>
 
 
-		</div>
+		</div>'; } ?>
 
 
 
@@ -2811,35 +1948,6 @@ Watch this video
 
 			</div>
 		</div>
-
-
-
-
-
-			
-
-
-
-
-
-	
-
-	<div id="ad_creative_3" class="ad-div " style="z-index: 1">
-
-	<iframe id="ad_creative_iframe_3" height="100" width="300" scrolling="no" frameborder="0" style="z-index: 1" id="promo1"></iframe>
-
-	<script type="text/javascript">
-		var add_timestamp = (Math.floor(Math.random() * 1000) == 0);
-		if (add_timestamp) {
-			var kts = new Date().getTime();
-			var iframe_src = "https://web.archive.org/web/20100816090028/http://ad-g.doubleclick.net/adi/tst.ythome/promo1;sz=300x100;klg=en;kt=K;kga=-1;kgg=-1;kcr=us;dc_dedup=1;kmyd=ad_creative_3;tile=3;kts=" + kts + ";ord=8604859653040600?";
-		} else {
-			var iframe_src = "https://web.archive.org/web/20100816090028/http://ad-g.doubleclick.net/adi/tst.ythome/promo1;sz=300x100;klg=en;kt=K;kga=-1;kgg=-1;kcr=us;dc_dedup=1;kmyd=ad_creative_3;tile=3;ord=8604859653040600?";
-		}
-		ad_iframe = _gel("ad_creative_iframe_3");
-		ad_iframe.src = iframe_src;
-	</script>
-
 
 	</div>
 

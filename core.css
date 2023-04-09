@@ -1733,7 +1733,7 @@ label {
  text-align:right
 }
 .hid {
- display:none
+ display:block;
 }
 .inline-block {
  display:-moz-inline-stack;
